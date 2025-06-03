@@ -1,17 +1,29 @@
-name: CI/CD
+name: Manual Build
 
 on:
-  push:
-    branches: [ "main", "master" ]
-    tags: [ "v*" ]
-  pull_request:
-    branches: [ "main", "master" ]
   workflow_dispatch:
+    inputs:
+      configuration:
+        description: '构建配置'
+        required: true
+        default: 'Release'
+        type: choice
+        options:
+        - Release
+        - Debug
+      createRelease:
+        description: '创建发布版本'
+        required: true
+        default: false
+        type: boolean
+      version:
+        description: '版本号 (仅在创建发布时需要)'
+        required: false
+        default: ''
+        type: string
 
 env:
   SOLUTION_NAME: SeeMyOpenWith.sln
-  CONFIGURATION: Release
-  DOTNET_VERSION: '4.8'
 
 jobs:
   build:
@@ -32,32 +44,44 @@ jobs:
       
     - name: 构建解决方案
       run: |
-        msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ env.CONFIGURATION }} /p:Platform="Any CPU"
+        msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ inputs.configuration }} /p:Platform="Any CPU"
+
+    - name: 检查构建产物
+      run: |
+        dir bin\${{ inputs.configuration }}
+      shell: cmd
       
     - name: 打包发布文件
-      if: startsWith(github.ref, 'refs/tags/')
+      if: inputs.createRelease == true
       run: |
         mkdir publish
-        copy "bin\${{ env.CONFIGURATION }}\*.*" "publish\"
+        copy "bin\${{ inputs.configuration }}\*.*" "publish\"
       
     - name: 创建发布
-      if: startsWith(github.ref, 'refs/tags/')
+      if: inputs.createRelease == true && inputs.version != ''
       uses: softprops/action-gh-release@v1
       with:
         files: |
           publish/*
-        name: Release ${{ github.ref_name }}
+        name: Release ${{ inputs.version }}
+        tag_name: v${{ inputs.version }}
         body: |
-          SeeMyOpenWith Release ${{ github.ref_name }}
+          SeeMyOpenWith Release ${{ inputs.version }}
           
-          自动发布于 ${{ github.event.repository.updated_at }}
+          手动构建发布于 ${{ github.event.repository.updated_at }}
+          
+          ### 构建信息
+          - 配置: ${{ inputs.configuration }}
+          - 触发者: ${{ github.actor }}
+          - 构建时间: ${{ github.event.repository.updated_at }}
         draft: true
         prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: 上传构建产物
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
-        name: SeeMyOpenWith-${{ github.sha }}
-        path: bin/${{ env.CONFIGURATION }}
+        name: SeeMyOpenWith-${{ inputs.configuration }}-${{ github.sha }}
+        path: bin/${{ inputs.configuration }}
+        if-no-files-found: error
