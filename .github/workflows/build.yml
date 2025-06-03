@@ -1,0 +1,63 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+env:
+  SOLUTION_NAME: SeeMyOpenWith.sln
+  CONFIGURATION: Release
+  DOTNET_VERSION: '4.8'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v3
+      
+    - name: 设置 MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+      
+    - name: 设置 NuGet
+      uses: NuGet/setup-nuget@v1.1.1
+      
+    - name: 还原 NuGet 包
+      run: nuget restore ${{ env.SOLUTION_NAME }}
+      
+    - name: 构建解决方案
+      run: |
+        msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ env.CONFIGURATION }} /p:Platform="Any CPU"
+      
+    - name: 打包发布文件
+      if: startsWith(github.ref, 'refs/tags/')
+      run: |
+        mkdir publish
+        copy "bin\${{ env.CONFIGURATION }}\*.*" "publish\"
+      
+    - name: 创建发布
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          publish/*
+        name: Release ${{ github.ref_name }}
+        body: |
+          SeeMyOpenWith Release ${{ github.ref_name }}
+          
+          自动发布于 ${{ github.event.repository.updated_at }}
+        draft: true
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: 上传构建产物
+      uses: actions/upload-artifact@v3
+      with:
+        name: SeeMyOpenWith-${{ github.sha }}
+        path: bin/${{ env.CONFIGURATION }}
