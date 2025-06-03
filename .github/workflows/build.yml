@@ -1,4 +1,4 @@
-name: Manual Build
+name: Build
 
 on:
   workflow_dispatch:
@@ -19,8 +19,20 @@ on:
       version:
         description: '版本号 (仅在创建发布时需要)'
         required: false
-        default: ''
+        default: 'Beta'
         type: string
+  push:
+    branches: [ main, master ]
+    paths:
+      - '**.cs'
+      - '**.csproj'
+      - '**.sln'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - '**.cs'
+      - '**.csproj'
+      - '**.sln'
 
 env:
   SOLUTION_NAME: SeeMyOpenWith.sln
