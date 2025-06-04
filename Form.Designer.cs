@@ -30,138 +30,138 @@ namespace SeeMyOpenWith
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.panel = new System.Windows.Forms.Panel();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage = new System.Windows.Forms.TabPage();
-            this.listViewReg = new System.Windows.Forms.ListView();
-            this.NameReg = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ExplainReg = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CommandReg = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStripRegList = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ToolStripMenuItemRevise = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemCommand = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemDel = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel.SuspendLayout();
-            this.tabControl.SuspendLayout();
-            this.tabPage.SuspendLayout();
-            this.contextMenuStripRegList.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            panel = new System.Windows.Forms.Panel();
+            tabControl = new System.Windows.Forms.TabControl();
+            tabPage = new System.Windows.Forms.TabPage();
+            listViewReg = new System.Windows.Forms.ListView();
+            NameReg = new System.Windows.Forms.ColumnHeader();
+            ExplainReg = new System.Windows.Forms.ColumnHeader();
+            CommandReg = new System.Windows.Forms.ColumnHeader();
+            contextMenuStripRegList = new System.Windows.Forms.ContextMenuStrip(components);
+            ToolStripMenuItemRevise = new System.Windows.Forms.ToolStripMenuItem();
+            ToolStripMenuItemCommand = new System.Windows.Forms.ToolStripMenuItem();
+            ToolStripMenuItemDel = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItemSearch = new System.Windows.Forms.ToolStripMenuItem();
+            panel.SuspendLayout();
+            tabControl.SuspendLayout();
+            tabPage.SuspendLayout();
+            contextMenuStripRegList.SuspendLayout();
+            SuspendLayout();
             // 
             // panel
             // 
-            this.panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel.Controls.Add(this.tabControl);
-            this.panel.Location = new System.Drawing.Point(12, 12);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(1618, 790);
-            this.panel.TabIndex = 0;
+            panel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            panel.Controls.Add(tabControl);
+            panel.Location = new System.Drawing.Point(5, 1);
+            panel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            panel.Name = "panel";
+            panel.Size = new System.Drawing.Size(1214, 781);
+            panel.TabIndex = 0;
             // 
             // tabControl
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabPage);
-            this.tabControl.ItemSize = new System.Drawing.Size(80, 25);
-            this.tabControl.Location = new System.Drawing.Point(0, 0);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1602, 786);
-            this.tabControl.TabIndex = 0;
+            tabControl.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tabControl.Controls.Add(tabPage);
+            tabControl.ItemSize = new System.Drawing.Size(80, 25);
+            tabControl.Location = new System.Drawing.Point(7, 4);
+            tabControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new System.Drawing.Size(1189, 772);
+            tabControl.TabIndex = 0;
             // 
             // tabPage
             // 
-            this.tabPage.Controls.Add(this.listViewReg);
-            this.tabPage.Location = new System.Drawing.Point(4, 29);
-            this.tabPage.Name = "tabPage";
-            this.tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage.Size = new System.Drawing.Size(1594, 753);
-            this.tabPage.TabIndex = 0;
-            this.tabPage.Text = "编辑";
-            this.tabPage.UseVisualStyleBackColor = true;
+            tabPage.Controls.Add(listViewReg);
+            tabPage.Location = new System.Drawing.Point(4, 29);
+            tabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage.Name = "tabPage";
+            tabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage.Size = new System.Drawing.Size(1181, 739);
+            tabPage.TabIndex = 0;
+            tabPage.Text = "编辑";
+            tabPage.UseVisualStyleBackColor = true;
             // 
             // listViewReg
             // 
-            this.listViewReg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewReg.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.NameReg,
-            this.ExplainReg,
-            this.CommandReg});
-            this.listViewReg.ContextMenuStrip = this.contextMenuStripRegList;
-            this.listViewReg.HideSelection = false;
-            this.listViewReg.Location = new System.Drawing.Point(3, 3);
-            this.listViewReg.Name = "listViewReg";
-            this.listViewReg.Size = new System.Drawing.Size(1585, 744);
-            this.listViewReg.TabIndex = 0;
-            this.listViewReg.UseCompatibleStateImageBehavior = false;
-            this.listViewReg.View = System.Windows.Forms.View.Details;
+            listViewReg.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listViewReg.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { NameReg, ExplainReg, CommandReg });
+            listViewReg.ContextMenuStrip = contextMenuStripRegList;
+            listViewReg.Location = new System.Drawing.Point(3, 4);
+            listViewReg.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            listViewReg.Name = "listViewReg";
+            listViewReg.Size = new System.Drawing.Size(1170, 731);
+            listViewReg.TabIndex = 0;
+            listViewReg.UseCompatibleStateImageBehavior = false;
+            listViewReg.View = System.Windows.Forms.View.Details;
             // 
             // NameReg
             // 
-            this.NameReg.Text = "程序";
-            this.NameReg.Width = 200;
+            NameReg.Text = "程序";
+            NameReg.Width = 200;
             // 
             // ExplainReg
             // 
-            this.ExplainReg.Text = "说明";
-            this.ExplainReg.Width = 200;
+            ExplainReg.Text = "说明";
+            ExplainReg.Width = 200;
             // 
             // CommandReg
             // 
-            this.CommandReg.Text = "命令";
-            this.CommandReg.Width = 350;
+            CommandReg.Text = "命令";
+            CommandReg.Width = 450;
             // 
             // contextMenuStripRegList
             // 
-            this.contextMenuStripRegList.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStripRegList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItemRevise,
-            this.ToolStripMenuItemDel});
-            this.contextMenuStripRegList.Name = "contextMenuStripRegList";
-            this.contextMenuStripRegList.Size = new System.Drawing.Size(211, 80);
+            contextMenuStripRegList.ImageScalingSize = new System.Drawing.Size(20, 20);
+            contextMenuStripRegList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemRevise, toolStripMenuItemSearch, ToolStripMenuItemDel });
+            contextMenuStripRegList.Name = "contextMenuStripRegList";
+            contextMenuStripRegList.Size = new System.Drawing.Size(211, 104);
             // 
             // ToolStripMenuItemRevise
             // 
-            this.ToolStripMenuItemRevise.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItemCommand});
-            this.ToolStripMenuItemRevise.Enabled = false;
-            this.ToolStripMenuItemRevise.Name = "ToolStripMenuItemRevise";
-            this.ToolStripMenuItemRevise.Size = new System.Drawing.Size(210, 24);
-            this.ToolStripMenuItemRevise.Text = "修改";
+            ToolStripMenuItemRevise.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemCommand });
+            ToolStripMenuItemRevise.Enabled = false;
+            ToolStripMenuItemRevise.Name = "ToolStripMenuItemRevise";
+            ToolStripMenuItemRevise.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemRevise.Text = "修改";
             // 
             // ToolStripMenuItemCommand
             // 
-            this.ToolStripMenuItemCommand.Name = "ToolStripMenuItemCommand";
-            this.ToolStripMenuItemCommand.Size = new System.Drawing.Size(122, 26);
-            this.ToolStripMenuItemCommand.Text = "命令";
+            ToolStripMenuItemCommand.Name = "ToolStripMenuItemCommand";
+            ToolStripMenuItemCommand.Size = new System.Drawing.Size(122, 26);
+            ToolStripMenuItemCommand.Text = "命令";
             // 
             // ToolStripMenuItemDel
             // 
-            this.ToolStripMenuItemDel.Name = "ToolStripMenuItemDel";
-            this.ToolStripMenuItemDel.Size = new System.Drawing.Size(210, 24);
-            this.ToolStripMenuItemDel.Text = "删除";
-            this.ToolStripMenuItemDel.Click += new System.EventHandler(this.ToolStripMenuItemDel_Click);
+            ToolStripMenuItemDel.Name = "ToolStripMenuItemDel";
+            ToolStripMenuItemDel.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemDel.Text = "删除";
+            ToolStripMenuItemDel.Click += ToolStripMenuItemDel_Click;
+            // 
+            // toolStripMenuItemSearch
+            // 
+            toolStripMenuItemSearch.Name = "toolStripMenuItemSearch";
+            toolStripMenuItemSearch.Size = new System.Drawing.Size(210, 24);
+            toolStripMenuItemSearch.Text = "使用 Bing 搜索";
+            toolStripMenuItemSearch.Click += toolStripMenuItemSearch_Click;
             // 
             // Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1642, 814);
-            this.Controls.Add(this.panel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form";
-            this.Text = "SeeMyOpenWith";
-            this.Load += new System.EventHandler(this.Form_Load);
-            this.panel.ResumeLayout(false);
-            this.tabControl.ResumeLayout(false);
-            this.tabPage.ResumeLayout(false);
-            this.contextMenuStripRegList.ResumeLayout(false);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1220, 782);
+            Controls.Add(panel);
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            MinimumSize = new System.Drawing.Size(1238, 829);
+            Name = "Form";
+            Text = "SeeMyOpenWith";
+            Load += Form_Load;
+            panel.ResumeLayout(false);
+            tabControl.ResumeLayout(false);
+            tabPage.ResumeLayout(false);
+            contextMenuStripRegList.ResumeLayout(false);
+            ResumeLayout(false);
 
         }
 
@@ -178,6 +178,7 @@ namespace SeeMyOpenWith
         private System.Windows.Forms.ColumnHeader NameReg;
         private System.Windows.Forms.ColumnHeader ExplainReg;
         private System.Windows.Forms.ColumnHeader CommandReg;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSearch;
     }
 }
 
