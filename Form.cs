@@ -205,7 +205,6 @@ namespace SeeMyOpenWith
 #endif
                         return defaultValue;
                     }
-
 #if DEBUG
                     Log.Debug("应用程序 {AppName} 无描述", appName);
 #endif
@@ -240,7 +239,9 @@ namespace SeeMyOpenWith
                     string friendlyName = appKey?.GetValue("FriendlyAppName")?.ToString();
                     if (!string.IsNullOrEmpty(friendlyName))
                     {
-                        Log.Error("{AppName} 友好名称: {friendlyName}", appName, friendlyName);
+#if DEBUG
+                        Log.Debug("{AppName} 友好名称: {friendlyName}", appName, friendlyName);
+#endif
                         return friendlyName;
                     }
                     return "无名称"; 
