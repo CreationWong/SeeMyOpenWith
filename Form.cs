@@ -1,12 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Serilog;
 
@@ -14,6 +8,8 @@ namespace SeeMyOpenWith
 {
     public partial class Form : System.Windows.Forms.Form
     {
+        public string RegPath = @"HKEY_CLASSES_ROOT\Applications";
+        
         public Form()
         {
             Log.Information("Form 已打开");
@@ -26,24 +22,30 @@ namespace SeeMyOpenWith
             System.Security.Principal.WindowsPrincipal principal = new System.Security.Principal.WindowsPrincipal(identity);
 
             if (principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
-            { 
-                Log.Information("Form 标题添加管理员后缀");
+            {
+#if DEBUG
+                Log.Debug("Form 标题添加管理员后缀");
+#endif
                 this.Text = "See My Open With - Administrator";
             }
             
-            // 调用PopulateApplicationsListView方法填充ListView
+            // 调用 PopulateApplicationsListView 方法填充 ListView
             Log.Information("开始填充列表");
             PopulateApplicationsListView(listViewReg);
         }
             
-        public void PopulateApplicationsListView(ListView listView)
+        private void PopulateApplicationsListView(ListView listView)
         {
             try
             {
-                Log.Debug("开始清理ListView列");
+#if DEBUG
+                Log.Debug("初始化 ListView ");
+#else
+                Log.Information("初始化列表内容");
+#endif
                 listView.Items.Clear();
 
-                Log.Information("开始读取注册表 HKEY_CLASSES_ROOT\\Applications");
+                Log.Information("开始读取注册表 {RegPath}", RegPath);
                 using (RegistryKey applicationsKey = Registry.ClassesRoot.OpenSubKey("Applications"))
                 {
                     if (applicationsKey != null)
@@ -72,7 +74,7 @@ namespace SeeMyOpenWith
                     }
                     else
                     {
-                        Log.Warning("无法访问 HKEY_CLASSES_ROOT\\Applications");
+                        Log.Warning("无法访问 {RegPath}", RegPath);
                     }
                 }
                 Log.Information("ListView填充完成，共 {Count} 条记录", listView.Items.Count);
@@ -95,7 +97,9 @@ namespace SeeMyOpenWith
                     string friendlyName = openKey?.GetValue("FriendlyAppName")?.ToString();
                     if (!string.IsNullOrEmpty(friendlyName))
                     {
+#if DEBUG
                         Log.Debug("应用程序 {AppName} 找到 FriendlyAppName: {FriendlyName}", appName, friendlyName);
+#endif
                         return friendlyName;
                     }
                     
@@ -115,7 +119,7 @@ namespace SeeMyOpenWith
 
         private string GetOpenCommand(RegistryKey applicationsKey, string appName)
         {
-            // 获取Applications\程序名\shell\open\command的值
+            // 获取 Applications\程序名\shell\open\command 的值
             using (RegistryKey appKey = applicationsKey.OpenSubKey(appName))
             using (RegistryKey shellKey = appKey?.OpenSubKey("shell"))
             using (RegistryKey openKey = shellKey?.OpenSubKey("open"))
@@ -147,7 +151,7 @@ namespace SeeMyOpenWith
                 MessageBoxIcon.Warning
             );
 
-            if (result != DialogResult.Yes)
+            if (result == DialogResult.No)
             {
                 Log.Information("用户取消删除操作");
                 return;
@@ -163,7 +167,7 @@ namespace SeeMyOpenWith
                 {
                     if (appsKey == null)
                     {
-                        Log.Warning("注册表路径 HKEY_CLASSES_ROOT\\Applications 不存在");
+                        Log.Warning("注册表路径 {RegPath} 不存在", RegPath);
                         MessageBox.Show("未找到 Applications 注册表项", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -179,7 +183,7 @@ namespace SeeMyOpenWith
 
                     // 删除注册表项
                     appsKey.DeleteSubKeyTree(appName); // 递归删除整个子项
-                    Log.Information($"已删除注册表项: HKEY_CLASSES_ROOT\\Applications\\{appName}");
+                    Log.Information($"已删除注册表项: {RegPath}\\{appName}", RegPath);
 
                     // 从 ListView 中移除该项
                     listViewReg.SelectedItems[0].Remove();
@@ -187,11 +191,13 @@ namespace SeeMyOpenWith
                     MessageBox.Show("删除成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+#if DEBUG
             catch (UnauthorizedAccessException ex)
             {
                 Log.Error($"权限不足，无法删除注册表项: {ex.Message}");
                 MessageBox.Show("删除失败：权限不足！请以管理员身份运行程序。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+#endif
             catch (Exception ex)
             {
                 Log.Error($"删除注册表项时出错: {ex.Message}");
