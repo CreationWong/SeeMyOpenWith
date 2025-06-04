@@ -56,34 +56,36 @@ jobs:
       
     - name: 构建解决方案
       run: |
-        msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ inputs.configuration || 'Debug' }} /p:Platform="Any CPU"
+        $config = "${{ github.event.inputs.configuration }}"
+        if (-not $config) { $config = "Debug" }
+        msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=$config /p:Platform="Any CPU"
 
     - name: 检查构建产物
       run: |
-        dir bin\${{ inputs.configuration }}
+        dir bin\${{ github.event.inputs.configuration || 'Debug' }}
       shell: cmd
       
     - name: 打包发布文件
-      if: inputs.createRelease == true
+      if: github.event.inputs.createRelease == 'true'
       run: |
         mkdir publish
-        copy "bin\${{ inputs.configuration }}\*.*" "publish\"
+        copy "bin\${{ github.event.inputs.configuration || 'Debug' }}\*.*" "publish\"
       
     - name: 创建发布
-      if: inputs.createRelease == true && inputs.version != ''
+      if: github.event.inputs.createRelease == 'true' && github.event.inputs.version != ''
       uses: softprops/action-gh-release@v1
       with:
         files: |
           publish/*
-        name: Release ${{ inputs.version }}
-        tag_name: v${{ inputs.version }}
+        name: Release ${{ github.event.inputs.version }}
+        tag_name: v${{ github.event.inputs.version }}
         body: |
-          SeeMyOpenWith Release ${{ inputs.version }}
+          SeeMyOpenWith Release ${{ github.event.inputs.version }}
           
-          手动构建发布于 ${{ github.event.repository.updated_at }}
+          自动发布构建发布于 ${{ github.event.repository.updated_at }}
           
           ### 构建信息
-          - 配置: ${{ inputs.configuration }}
+          - 配置: ${{ github.event.inputs.configuration }}
           - 触发者: ${{ github.actor }}
           - 构建时间: ${{ github.event.repository.updated_at }}
         draft: true
@@ -94,6 +96,6 @@ jobs:
     - name: 上传构建产物
       uses: actions/upload-artifact@v4
       with:
-        name: SeeMyOpenWith-${{ inputs.configuration }}-${{ github.sha }}
-        path: bin/${{ inputs.configuration }}
+        name: SeeMyOpenWith-${{ github.event.inputs.configuration || 'Debug' }}-${{ github.sha }}
+        path: bin/${{ github.event.inputs.configuration || 'Debug' }}
         if-no-files-found: error
