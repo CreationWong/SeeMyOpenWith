@@ -1,6 +1,5 @@
 # See My Open With - 查看我的打开方式
 
-
 > [!CAUTION]
 > 本程序涉及**对系统注册表修改**操作,任何误操作均可能导致**不可挽回**后果! 
 >
@@ -24,7 +23,7 @@
 - [ ] 添加额外功能
 - [ ] 添加操作回滚
 - [ ] 优化代码逻辑
-- [ ] 采用 .Net 9.0
+- [x] 采用 .Net 9.0
 
 ## 协议
 
@@ -712,3 +711,20 @@ Public License instead of this License.  But first, please read
 
 </details>
 
+
+
+## 开源软件使用
+
+### Serilog
+
+用于程序运行日志记录.
+
+使用 [Apache-2.0 license](https://github.com/serilog/serilog?tab=readme-ov-file#Apache-2.0-1-ov-file) 许可协议
+
+
+
+## 特别感谢
+
+本项目使用 **JetBrains Rider** 进行代码编写、调试. 使用 **Visual Studio 2022** 进行 UI 绘制、编译.
+
+<img href="https://www.jetbrains.com" src="https://resources.jetbrains.com/storage/products/company/brand/logos/Rider.svg" alt="Rider logo." >
