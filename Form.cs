@@ -157,10 +157,12 @@ namespace SeeMyOpenWith
                         {
                             try
                             {
+                                string friendlyName = GetFriendlyAppName(applicationsKey, appName);
                                 string explain = GetOpenDescription(applicationsKey, appName);
                                 string command = GetOpenCommand(applicationsKey, appName);
 
                                 ListViewItem item = new ListViewItem(appName);
+                                item.SubItems.Add(friendlyName);    // 添加友好名称
                                 item.SubItems.Add(explain);
                                 item.SubItems.Add(command);
 
@@ -194,20 +196,20 @@ namespace SeeMyOpenWith
                 using (RegistryKey shellKey = appKey?.OpenSubKey("shell"))
                 using (RegistryKey openKey = shellKey?.OpenSubKey("open"))
                 {
-                    string friendlyName = openKey?.GetValue("FriendlyAppName")?.ToString();
-                    if (!string.IsNullOrEmpty(friendlyName))
+
+                    string defaultValue = openKey?.GetValue("")?.ToString();
+                    if (!string.IsNullOrEmpty(defaultValue))
                     {
 #if DEBUG
-                        Log.Debug("应用程序 {AppName} 找到 FriendlyAppName: {FriendlyName}", appName, friendlyName);
+                        Log.Debug("应用程序 {AppName} 使用默认描述: {DefaultValue}", appName, defaultValue);
 #endif
-                        return friendlyName;
+                        return defaultValue;
                     }
 
-                    string defaultValue = openKey?.GetValue("")?.ToString() ?? "无";
 #if DEBUG
-                    Log.Debug("应用程序 {AppName} 使用默认描述: {Description}", appName, defaultValue);
+                    Log.Debug("应用程序 {AppName} 无描述", appName);
 #endif
-                    return defaultValue;
+                    return "无描述";
                 }
             }
             catch (Exception ex)
@@ -225,10 +227,32 @@ namespace SeeMyOpenWith
             using (RegistryKey openKey = shellKey?.OpenSubKey("open"))
             using (RegistryKey commandKey = openKey?.OpenSubKey("command"))
             {
-                return commandKey?.GetValue("")?.ToString() ?? "无";
+                return commandKey?.GetValue("")?.ToString() ?? "NULL";
             }
         }
         
+        private string GetFriendlyAppName(RegistryKey applicationsKey, string appName)
+        {
+            try
+            {
+                using (RegistryKey appKey = applicationsKey.OpenSubKey(appName))
+                {
+                    string friendlyName = appKey?.GetValue("FriendlyAppName")?.ToString();
+                    if (!string.IsNullOrEmpty(friendlyName))
+                    {
+                        Log.Error("{AppName} 友好名称: {friendlyName}", appName, friendlyName);
+                        return friendlyName;
+                    }
+                    return "无名称"; 
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "获取应用程序 {AppName} 的名称时出错", appName);
+                return appName;
+            }
+        }
+
         /// <summary>
         /// 获取选中项
         /// </summary>
