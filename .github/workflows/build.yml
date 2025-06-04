@@ -56,7 +56,7 @@ jobs:
       
     - name: 构建解决方案
       run: |
-        msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ inputs.configuration }} /p:Platform="Any CPU"
+        msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ inputs.configuration || 'Debug' }} /p:Platform="Any CPU"
 
     - name: 检查构建产物
       run: |
