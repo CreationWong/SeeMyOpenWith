@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace SeeMyOpenWith
+﻿namespace SeeMyOpenWith
 {
-    partial class Form
+    partial class Main
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -41,7 +39,6 @@ namespace SeeMyOpenWith
             CommandReg = new System.Windows.Forms.ColumnHeader();
             contextMenuStripRegList = new System.Windows.Forms.ContextMenuStrip(components);
             ToolStripMenuItemRevise = new System.Windows.Forms.ToolStripMenuItem();
-            ToolStripMenuItemCommand = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItemSearch = new System.Windows.Forms.ToolStripMenuItem();
             ToolStripMenuItemDel = new System.Windows.Forms.ToolStripMenuItem();
             tabPageAbout = new System.Windows.Forms.TabPage();
@@ -130,17 +127,10 @@ namespace SeeMyOpenWith
             // 
             // ToolStripMenuItemRevise
             // 
-            ToolStripMenuItemRevise.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemCommand });
-            ToolStripMenuItemRevise.Enabled = false;
             ToolStripMenuItemRevise.Name = "ToolStripMenuItemRevise";
             ToolStripMenuItemRevise.Size = new System.Drawing.Size(178, 24);
             ToolStripMenuItemRevise.Text = "修改";
-            // 
-            // ToolStripMenuItemCommand
-            // 
-            ToolStripMenuItemCommand.Name = "ToolStripMenuItemCommand";
-            ToolStripMenuItemCommand.Size = new System.Drawing.Size(122, 26);
-            ToolStripMenuItemCommand.Text = "命令";
+            ToolStripMenuItemRevise.Click += ToolStripMenuItemRevise_Click;
             // 
             // toolStripMenuItemSearch
             // 
@@ -170,6 +160,7 @@ namespace SeeMyOpenWith
             // labelAbout
             // 
             labelAbout.AutoSize = true;
+            labelAbout.Cursor = System.Windows.Forms.Cursors.Help;
             labelAbout.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             labelAbout.Location = new System.Drawing.Point(6, 3);
             labelAbout.Name = "labelAbout";
@@ -177,7 +168,7 @@ namespace SeeMyOpenWith
             labelAbout.TabIndex = 0;
             labelAbout.Text = "See My Open With - 查看我的打开方式";
             // 
-            // Form
+            // Main
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -185,7 +176,7 @@ namespace SeeMyOpenWith
             Controls.Add(panel);
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MinimumSize = new System.Drawing.Size(1500, 900);
-            Name = "Form";
+            Name = "Main";
             Text = "SeeMyOpenWith";
             Load += Form_Load;
             panel.ResumeLayout(false);
@@ -203,7 +194,6 @@ namespace SeeMyOpenWith
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripRegList;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemRevise;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCommand;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDel;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage;

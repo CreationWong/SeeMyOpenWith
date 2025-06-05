@@ -33,7 +33,7 @@ namespace SeeMyOpenWith
             {
                 Log.Information("检测到管理员权限");
                 Log.Information("正在打开窗口");
-                Application.Run(new Form());
+                Application.Run(new Main());
                 Log.Information("窗口关闭");
                 Log.Information("Application ended");
                 Log.CloseAndFlush();

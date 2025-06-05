@@ -1,19 +1,19 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using Serilog;
 
 namespace SeeMyOpenWith
 {
-    public partial class Form : System.Windows.Forms.Form
+    public partial class Main : System.Windows.Forms.Form
     {
         public string RegPath = @"HKEY_CLASSES_ROOT\Applications";
 
-        public Form()
+        public Main()
         {
-            Log.Information("Form 已打开");
+            Log.Information("Main 已打开");
             InitializeComponent();
         }
 
@@ -25,7 +25,7 @@ namespace SeeMyOpenWith
             if (principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
             {
 #if DEBUG
-                Log.Debug("Form 标题添加管理员后缀");
+                Log.Debug("Main 标题添加管理员后缀");
 #endif
                 this.Text = "See My Open With - Administrator";
             }
@@ -34,25 +34,35 @@ namespace SeeMyOpenWith
             Log.Information("开始填充列表");
             PopulateApplicationsListView(listViewReg);
         }
-        
+
         private void toolStripMenuItemSearch_Click(object sender, EventArgs e)
         {
 #if DEBUG
             Log.Debug("toolStripMenuItemSearch_Click 触发");
 #endif
             Log.Information("用户单击搜索");
-            
+
             // 获取选中项的应用程序名称
             if (GetAppName() == null)
             {
                 return;
             }
-            
+
             string appName = GetAppName();
-            
+
             WebSearch(appName);
         }
-        
+
+        private void ToolStripMenuItemRevise_Click(object sender, EventArgs e)
+        {
+#if DEBUG
+            Log.Debug("ToolStripMenuItemRevise_Click 触发");
+#endif
+            Log.Information("用户单击修改");
+
+            MessageBox.Show("功能开发中...", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
         private void ToolStripMenuItemDel_Click(object sender, EventArgs e)
         {
 #if DEBUG
@@ -65,9 +75,9 @@ namespace SeeMyOpenWith
             {
                 return;
             }
-            
+
             string appName = GetAppName();
-            
+
             // 询问用户是否确认删除
             DialogResult result = MessageBox.Show(
                 $"确定要删除注册表中的应用程序 '{appName}' 吗？此操作不可恢复！",
@@ -129,7 +139,7 @@ namespace SeeMyOpenWith
                 MessageBox.Show($"删除失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         /// <summary>
         /// 初始化 ListView 
         /// </summary>
@@ -229,7 +239,7 @@ namespace SeeMyOpenWith
                 return commandKey?.GetValue("")?.ToString() ?? "NULL";
             }
         }
-        
+
         private string GetFriendlyAppName(RegistryKey applicationsKey, string appName)
         {
             try
@@ -244,7 +254,7 @@ namespace SeeMyOpenWith
 #endif
                         return friendlyName;
                     }
-                    return "无名称"; 
+                    return "无名称";
                 }
             }
             catch (Exception ex)
@@ -261,7 +271,7 @@ namespace SeeMyOpenWith
         private string GetAppName()
         {
 #if DEBUG
-            Log.Debug("GetAppName() 触发");   
+            Log.Debug("GetAppName() 触发");
 #endif
             // 检查是否有选中的项
             if (listViewReg.SelectedItems.Count == 0)
@@ -270,9 +280,9 @@ namespace SeeMyOpenWith
                 MessageBox.Show("请先选择一个应用程序", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return null;
             }
-            
+
             // 返回选中项的应用程序名称
-            
+
             return listViewReg.SelectedItems[0].Text;
         }
 
@@ -281,10 +291,10 @@ namespace SeeMyOpenWith
         /// </summary>
         /// <param name="appName">应用程序名</param>
         /// <param name="search">(可选)默认必应- 搜索引擎 URL </param>
-        private void WebSearch(string appName,string search = "www.bing.com/search?q=")
+        private void WebSearch(string appName, string search = "www.bing.com/search?q=")
         {
             Log.Information($"WebSearch(\"{appName}\", \"{search}\")");
-            
+
             ProcessStartInfo processStartInfo = new ProcessStartInfo
             {
                 UseShellExecute = true,
