@@ -72,6 +72,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Remove="src\Class\**" />
   </ItemGroup>
   <ItemGroup>
     <None Update="LICENSE.txt">
@@ -86,5 +87,9 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Remove="src\Class\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="src\Class\**" />
   </ItemGroup>
 </Project>

@@ -38,8 +38,9 @@
             ExplainReg = new System.Windows.Forms.ColumnHeader();
             CommandReg = new System.Windows.Forms.ColumnHeader();
             contextMenuStripRegList = new System.Windows.Forms.ContextMenuStrip(components);
+            ToolStripMenuItemFlush = new System.Windows.Forms.ToolStripMenuItem();
             ToolStripMenuItemRevise = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuItemSearch = new System.Windows.Forms.ToolStripMenuItem();
+            ToolStripMenuItemSearch = new System.Windows.Forms.ToolStripMenuItem();
             ToolStripMenuItemDel = new System.Windows.Forms.ToolStripMenuItem();
             tabPageAbout = new System.Windows.Forms.TabPage();
             labelAbout = new System.Windows.Forms.Label();
@@ -97,6 +98,7 @@
             listViewReg.TabIndex = 0;
             listViewReg.UseCompatibleStateImageBehavior = false;
             listViewReg.View = System.Windows.Forms.View.Details;
+            listViewReg.KeyDown += listViewReg_KeyDown;
             // 
             // NameReg
             // 
@@ -121,29 +123,37 @@
             // contextMenuStripRegList
             // 
             contextMenuStripRegList.ImageScalingSize = new System.Drawing.Size(20, 20);
-            contextMenuStripRegList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemRevise, toolStripMenuItemSearch, ToolStripMenuItemDel });
+            contextMenuStripRegList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemFlush, ToolStripMenuItemRevise, ToolStripMenuItemSearch, ToolStripMenuItemDel });
             contextMenuStripRegList.Name = "contextMenuStripRegList";
-            contextMenuStripRegList.Size = new System.Drawing.Size(179, 76);
+            contextMenuStripRegList.Size = new System.Drawing.Size(211, 128);
+            // 
+            // ToolStripMenuItemFlush
+            // 
+            ToolStripMenuItemFlush.Name = "ToolStripMenuItemFlush";
+            ToolStripMenuItemFlush.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemFlush.Text = "刷新 (F5)";
+            ToolStripMenuItemFlush.Click += ToolStripMenuItemFlush_Click;
             // 
             // ToolStripMenuItemRevise
             // 
+            ToolStripMenuItemRevise.Enabled = false;
             ToolStripMenuItemRevise.Name = "ToolStripMenuItemRevise";
-            ToolStripMenuItemRevise.Size = new System.Drawing.Size(178, 24);
+            ToolStripMenuItemRevise.Size = new System.Drawing.Size(210, 24);
             ToolStripMenuItemRevise.Text = "修改";
             ToolStripMenuItemRevise.Click += ToolStripMenuItemRevise_Click;
             // 
-            // toolStripMenuItemSearch
+            // ToolStripMenuItemSearch
             // 
-            toolStripMenuItemSearch.Name = "toolStripMenuItemSearch";
-            toolStripMenuItemSearch.Size = new System.Drawing.Size(178, 24);
-            toolStripMenuItemSearch.Text = "使用 Bing 搜索";
-            toolStripMenuItemSearch.Click += toolStripMenuItemSearch_Click;
+            ToolStripMenuItemSearch.Name = "ToolStripMenuItemSearch";
+            ToolStripMenuItemSearch.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemSearch.Text = "使用 Bing 搜索";
+            ToolStripMenuItemSearch.Click += ToolStripMenuItemSearch_Click;
             // 
             // ToolStripMenuItemDel
             // 
             ToolStripMenuItemDel.Name = "ToolStripMenuItemDel";
-            ToolStripMenuItemDel.Size = new System.Drawing.Size(178, 24);
-            ToolStripMenuItemDel.Text = "删除";
+            ToolStripMenuItemDel.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemDel.Text = "删除 (Del)";
             ToolStripMenuItemDel.Click += ToolStripMenuItemDel_Click;
             // 
             // tabPageAbout
@@ -201,10 +211,11 @@
         private System.Windows.Forms.ColumnHeader NameReg;
         private System.Windows.Forms.ColumnHeader ExplainReg;
         private System.Windows.Forms.ColumnHeader CommandReg;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSearch;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemSearch;
         private System.Windows.Forms.TabPage tabPageAbout;
         private System.Windows.Forms.Label labelAbout;
         private System.Windows.Forms.ColumnHeader AppName;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemFlush;
     }
 }
 
