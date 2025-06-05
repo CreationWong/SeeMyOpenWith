@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace SeeMyOpenWith
+﻿namespace SeeMyOpenWith
 {
-    partial class Form
+    partial class Main
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -40,9 +38,9 @@ namespace SeeMyOpenWith
             ExplainReg = new System.Windows.Forms.ColumnHeader();
             CommandReg = new System.Windows.Forms.ColumnHeader();
             contextMenuStripRegList = new System.Windows.Forms.ContextMenuStrip(components);
+            ToolStripMenuItemFlush = new System.Windows.Forms.ToolStripMenuItem();
             ToolStripMenuItemRevise = new System.Windows.Forms.ToolStripMenuItem();
-            ToolStripMenuItemCommand = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripMenuItemSearch = new System.Windows.Forms.ToolStripMenuItem();
+            ToolStripMenuItemSearch = new System.Windows.Forms.ToolStripMenuItem();
             ToolStripMenuItemDel = new System.Windows.Forms.ToolStripMenuItem();
             tabPageAbout = new System.Windows.Forms.TabPage();
             labelAbout = new System.Windows.Forms.Label();
@@ -100,6 +98,7 @@ namespace SeeMyOpenWith
             listViewReg.TabIndex = 0;
             listViewReg.UseCompatibleStateImageBehavior = false;
             listViewReg.View = System.Windows.Forms.View.Details;
+            listViewReg.KeyDown += listViewReg_KeyDown;
             // 
             // NameReg
             // 
@@ -124,36 +123,37 @@ namespace SeeMyOpenWith
             // contextMenuStripRegList
             // 
             contextMenuStripRegList.ImageScalingSize = new System.Drawing.Size(20, 20);
-            contextMenuStripRegList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemRevise, toolStripMenuItemSearch, ToolStripMenuItemDel });
+            contextMenuStripRegList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemFlush, ToolStripMenuItemRevise, ToolStripMenuItemSearch, ToolStripMenuItemDel });
             contextMenuStripRegList.Name = "contextMenuStripRegList";
-            contextMenuStripRegList.Size = new System.Drawing.Size(179, 76);
+            contextMenuStripRegList.Size = new System.Drawing.Size(211, 128);
+            // 
+            // ToolStripMenuItemFlush
+            // 
+            ToolStripMenuItemFlush.Name = "ToolStripMenuItemFlush";
+            ToolStripMenuItemFlush.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemFlush.Text = "刷新 (F5)";
+            ToolStripMenuItemFlush.Click += ToolStripMenuItemFlush_Click;
             // 
             // ToolStripMenuItemRevise
             // 
-            ToolStripMenuItemRevise.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemCommand });
             ToolStripMenuItemRevise.Enabled = false;
             ToolStripMenuItemRevise.Name = "ToolStripMenuItemRevise";
-            ToolStripMenuItemRevise.Size = new System.Drawing.Size(178, 24);
+            ToolStripMenuItemRevise.Size = new System.Drawing.Size(210, 24);
             ToolStripMenuItemRevise.Text = "修改";
+            ToolStripMenuItemRevise.Click += ToolStripMenuItemRevise_Click;
             // 
-            // ToolStripMenuItemCommand
+            // ToolStripMenuItemSearch
             // 
-            ToolStripMenuItemCommand.Name = "ToolStripMenuItemCommand";
-            ToolStripMenuItemCommand.Size = new System.Drawing.Size(122, 26);
-            ToolStripMenuItemCommand.Text = "命令";
-            // 
-            // toolStripMenuItemSearch
-            // 
-            toolStripMenuItemSearch.Name = "toolStripMenuItemSearch";
-            toolStripMenuItemSearch.Size = new System.Drawing.Size(178, 24);
-            toolStripMenuItemSearch.Text = "使用 Bing 搜索";
-            toolStripMenuItemSearch.Click += toolStripMenuItemSearch_Click;
+            ToolStripMenuItemSearch.Name = "ToolStripMenuItemSearch";
+            ToolStripMenuItemSearch.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemSearch.Text = "使用 Bing 搜索";
+            ToolStripMenuItemSearch.Click += ToolStripMenuItemSearch_Click;
             // 
             // ToolStripMenuItemDel
             // 
             ToolStripMenuItemDel.Name = "ToolStripMenuItemDel";
-            ToolStripMenuItemDel.Size = new System.Drawing.Size(178, 24);
-            ToolStripMenuItemDel.Text = "删除";
+            ToolStripMenuItemDel.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemDel.Text = "删除 (Del)";
             ToolStripMenuItemDel.Click += ToolStripMenuItemDel_Click;
             // 
             // tabPageAbout
@@ -170,6 +170,7 @@ namespace SeeMyOpenWith
             // labelAbout
             // 
             labelAbout.AutoSize = true;
+            labelAbout.Cursor = System.Windows.Forms.Cursors.Help;
             labelAbout.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             labelAbout.Location = new System.Drawing.Point(6, 3);
             labelAbout.Name = "labelAbout";
@@ -177,7 +178,7 @@ namespace SeeMyOpenWith
             labelAbout.TabIndex = 0;
             labelAbout.Text = "See My Open With - 查看我的打开方式";
             // 
-            // Form
+            // Main
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -185,7 +186,7 @@ namespace SeeMyOpenWith
             Controls.Add(panel);
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MinimumSize = new System.Drawing.Size(1500, 900);
-            Name = "Form";
+            Name = "Main";
             Text = "SeeMyOpenWith";
             Load += Form_Load;
             panel.ResumeLayout(false);
@@ -203,7 +204,6 @@ namespace SeeMyOpenWith
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripRegList;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemRevise;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCommand;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDel;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage;
@@ -211,10 +211,11 @@ namespace SeeMyOpenWith
         private System.Windows.Forms.ColumnHeader NameReg;
         private System.Windows.Forms.ColumnHeader ExplainReg;
         private System.Windows.Forms.ColumnHeader CommandReg;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSearch;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemSearch;
         private System.Windows.Forms.TabPage tabPageAbout;
         private System.Windows.Forms.Label labelAbout;
         private System.Windows.Forms.ColumnHeader AppName;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemFlush;
     }
 }
 

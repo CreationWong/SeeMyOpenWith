@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows10.0.17763.0</TargetFramework>
     <OutputType>WinExe</OutputType>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
@@ -33,15 +33,18 @@
     <Title>SeeMyOpenWith</Title>
     <Company />
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-    <FileVersion>1.0.0</FileVersion>
+    <FileVersion>1.1.0</FileVersion>
     <AssemblyVersion>1.1.0</AssemblyVersion>
     <NeutralLanguage>zh</NeutralLanguage>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Version>1.1.0</Version>
+    <Copyright>Copyright  © 2025 CreationWong</Copyright>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>embedded</DebugType>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>embedded</DebugType>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -69,6 +72,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Remove="src\Class\**" />
   </ItemGroup>
   <ItemGroup>
     <None Update="LICENSE.txt">
@@ -83,5 +87,9 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Remove="src\Class\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="src\Class\**" />
   </ItemGroup>
 </Project>
