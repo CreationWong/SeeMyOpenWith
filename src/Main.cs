@@ -13,7 +13,7 @@ public partial class Main : Form
 {
     // 类声明
     RegIO regIO = new RegIO();
-    
+
     public Main()
     {
         Log.Information("Main 已打开");
@@ -28,9 +28,11 @@ public partial class Main : Form
         if (principal.IsInRole(WindowsBuiltInRole.Administrator))
         {
 #if DEBUG
-            Log.Debug("Main 标题添加管理员后缀");
-#endif
+            Log.Debug("Main 标题添加调试后缀");
+            Text = "See My Open With - Debug \t 开发模式! 请不要在正式环境使用!!";
+#else
             Text = "See My Open With - Administrator";
+#endif           
         }
 
         Log.Information("开始填充列表");
@@ -48,27 +50,27 @@ public partial class Main : Form
     private void listViewReg_KeyDown(object sender, KeyEventArgs e)
     {
         var listViewDispose = new ListViewDispose(listViewReg);
-        
+
         // 获取选中项的应用程序名称 存储为 appName
         var appName = listViewDispose.GetAppName();
         if (appName == null) return;
-        
+
         // F5 刷新
         if (e.KeyCode == Keys.F5)
         {
             Log.Information("用户按下 F5 刷新");
             FefreshListView();
         }
-        
+
         // Del 删除
         if (e.KeyCode == Keys.Delete)
         {
             if (MessageBoxDel(appName))
             {
-              regIO.DeleteRegistryApp(appName);
-              
-              Log.Information("开始刷新列表");
-              FefreshListView();
+                regIO.DeleteRegistryApp(appName);
+
+                Log.Information("开始刷新列表");
+                FefreshListView();
             }
         }
     }
@@ -102,7 +104,7 @@ public partial class Main : Form
     private void ToolStripMenuItemDel_Click(object sender, EventArgs e)
     {
 #if DEBUG
-        Log.Debug("toolStripMenuItemDel_Click 触发");
+        Log.Debug("ToolStripMenuItemDel_Click 触发");
 #endif
         Log.Information("用户单击删除");
         var listViewDispose = new ListViewDispose(listViewReg);
@@ -116,6 +118,19 @@ public partial class Main : Form
             Log.Information("开始刷新列表");
             FefreshListView();
         }
+    }
+    
+    private void buttonOpenLog_Click(object sender, EventArgs e)
+    {
+#if DEBUG
+        Log.Debug("buttonOpenLog_Click 触发");
+#endif
+        var processStartInfo = new ProcessStartInfo
+        {
+            UseShellExecute = true,
+            FileName = ".\\logs"
+        };
+        Process.Start(processStartInfo);
     }
 
     private void FefreshListView()
@@ -144,7 +159,7 @@ public partial class Main : Form
             Log.Information("用户取消删除操作");
             return false;
         }
-        
+
         return true;
     }
 

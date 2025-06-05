@@ -36,7 +36,7 @@
 
 ## 协议
 
-采用 GNU GENERAL PUBLIC LICENSE Version 3 协议分发代码、可执行程序.
+采用 GNU GENERAL PUBLIC LICENSE Version 3 协议分发大部分代码和所有可执行程序.
 
 <details>
 <summary>GNU GENERAL PUBLIC LICENSE Version 3</summary>
@@ -720,7 +720,7 @@ Public License instead of this License.  But first, please read
 
 </details>
 
-
+`IniFile.cs` 代码采用 `Mozilla Public License Version 2.0` 分发
 
 ## 开源软件使用
 
@@ -728,7 +728,7 @@ Public License instead of this License.  But first, please read
 
 用于程序运行日志记录.
 
-使用 [Apache-2.0 license](https://github.com/serilog/serilog?tab=readme-ov-file#Apache-2.0-1-ov-file) 许可协议
+采用 [Apache-2.0 license](https://github.com/serilog/serilog?tab=readme-ov-file#Apache-2.0-1-ov-file) 许可协议
 
 
 

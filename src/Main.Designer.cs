@@ -42,12 +42,20 @@
             ToolStripMenuItemRevise = new System.Windows.Forms.ToolStripMenuItem();
             ToolStripMenuItemSearch = new System.Windows.Forms.ToolStripMenuItem();
             ToolStripMenuItemDel = new System.Windows.Forms.ToolStripMenuItem();
+            tabPageSettings = new System.Windows.Forms.TabPage();
+            panelSettings = new System.Windows.Forms.Panel();
+            groupBoxLog = new System.Windows.Forms.GroupBox();
+            buttonOpenLog = new System.Windows.Forms.Button();
             tabPageAbout = new System.Windows.Forms.TabPage();
             labelAbout = new System.Windows.Forms.Label();
+            toolTipDelLog = new System.Windows.Forms.ToolTip(components);
             panel.SuspendLayout();
             tabControl.SuspendLayout();
             tabPage.SuspendLayout();
             contextMenuStripRegList.SuspendLayout();
+            tabPageSettings.SuspendLayout();
+            panelSettings.SuspendLayout();
+            groupBoxLog.SuspendLayout();
             tabPageAbout.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,6 +73,7 @@
             // 
             tabControl.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             tabControl.Controls.Add(tabPage);
+            tabControl.Controls.Add(tabPageSettings);
             tabControl.Controls.Add(tabPageAbout);
             tabControl.ItemSize = new System.Drawing.Size(80, 25);
             tabControl.Location = new System.Drawing.Point(7, 4);
@@ -125,36 +134,78 @@
             contextMenuStripRegList.ImageScalingSize = new System.Drawing.Size(20, 20);
             contextMenuStripRegList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { ToolStripMenuItemFlush, ToolStripMenuItemRevise, ToolStripMenuItemSearch, ToolStripMenuItemDel });
             contextMenuStripRegList.Name = "contextMenuStripRegList";
-            contextMenuStripRegList.Size = new System.Drawing.Size(211, 128);
+            contextMenuStripRegList.Size = new System.Drawing.Size(179, 100);
             // 
             // ToolStripMenuItemFlush
             // 
             ToolStripMenuItemFlush.Name = "ToolStripMenuItemFlush";
-            ToolStripMenuItemFlush.Size = new System.Drawing.Size(210, 24);
-            ToolStripMenuItemFlush.Text = "刷新 (F5)";
+            ToolStripMenuItemFlush.Size = new System.Drawing.Size(178, 24);
+            ToolStripMenuItemFlush.Text = "刷新 (&F5)";
             ToolStripMenuItemFlush.Click += ToolStripMenuItemFlush_Click;
             // 
             // ToolStripMenuItemRevise
             // 
             ToolStripMenuItemRevise.Enabled = false;
             ToolStripMenuItemRevise.Name = "ToolStripMenuItemRevise";
-            ToolStripMenuItemRevise.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemRevise.Size = new System.Drawing.Size(178, 24);
             ToolStripMenuItemRevise.Text = "修改";
             ToolStripMenuItemRevise.Click += ToolStripMenuItemRevise_Click;
             // 
             // ToolStripMenuItemSearch
             // 
             ToolStripMenuItemSearch.Name = "ToolStripMenuItemSearch";
-            ToolStripMenuItemSearch.Size = new System.Drawing.Size(210, 24);
+            ToolStripMenuItemSearch.Size = new System.Drawing.Size(178, 24);
             ToolStripMenuItemSearch.Text = "使用 Bing 搜索";
             ToolStripMenuItemSearch.Click += ToolStripMenuItemSearch_Click;
             // 
             // ToolStripMenuItemDel
             // 
             ToolStripMenuItemDel.Name = "ToolStripMenuItemDel";
-            ToolStripMenuItemDel.Size = new System.Drawing.Size(210, 24);
-            ToolStripMenuItemDel.Text = "删除 (Del)";
+            ToolStripMenuItemDel.Size = new System.Drawing.Size(178, 24);
+            ToolStripMenuItemDel.Text = "删除 (&Del)";
             ToolStripMenuItemDel.Click += ToolStripMenuItemDel_Click;
+            // 
+            // tabPageSettings
+            // 
+            tabPageSettings.Controls.Add(panelSettings);
+            tabPageSettings.Location = new System.Drawing.Point(4, 29);
+            tabPageSettings.Name = "tabPageSettings";
+            tabPageSettings.Padding = new System.Windows.Forms.Padding(3);
+            tabPageSettings.Size = new System.Drawing.Size(1443, 810);
+            tabPageSettings.TabIndex = 1;
+            tabPageSettings.Text = "设置";
+            tabPageSettings.UseVisualStyleBackColor = true;
+            // 
+            // panelSettings
+            // 
+            panelSettings.Controls.Add(groupBoxLog);
+            panelSettings.Dock = System.Windows.Forms.DockStyle.Top;
+            panelSettings.Location = new System.Drawing.Point(3, 3);
+            panelSettings.Name = "panelSettings";
+            panelSettings.Size = new System.Drawing.Size(1437, 798);
+            panelSettings.TabIndex = 0;
+            // 
+            // groupBoxLog
+            // 
+            groupBoxLog.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBoxLog.Controls.Add(buttonOpenLog);
+            groupBoxLog.Location = new System.Drawing.Point(3, 3);
+            groupBoxLog.Name = "groupBoxLog";
+            groupBoxLog.Size = new System.Drawing.Size(1431, 80);
+            groupBoxLog.TabIndex = 0;
+            groupBoxLog.TabStop = false;
+            groupBoxLog.Text = "日志";
+            // 
+            // buttonOpenLog
+            // 
+            buttonOpenLog.Dock = System.Windows.Forms.DockStyle.Top;
+            buttonOpenLog.Location = new System.Drawing.Point(3, 23);
+            buttonOpenLog.Name = "buttonOpenLog";
+            buttonOpenLog.Size = new System.Drawing.Size(1425, 51);
+            buttonOpenLog.TabIndex = 0;
+            buttonOpenLog.Text = "打开日志文件夹";
+            buttonOpenLog.UseVisualStyleBackColor = true;
+            buttonOpenLog.Click += buttonOpenLog_Click;
             // 
             // tabPageAbout
             // 
@@ -163,7 +214,7 @@
             tabPageAbout.Name = "tabPageAbout";
             tabPageAbout.Padding = new System.Windows.Forms.Padding(3);
             tabPageAbout.Size = new System.Drawing.Size(1443, 810);
-            tabPageAbout.TabIndex = 1;
+            tabPageAbout.TabIndex = 2;
             tabPageAbout.Text = "关于";
             tabPageAbout.UseVisualStyleBackColor = true;
             // 
@@ -177,6 +228,12 @@
             labelAbout.Size = new System.Drawing.Size(372, 27);
             labelAbout.TabIndex = 0;
             labelAbout.Text = "See My Open With - 查看我的打开方式";
+            // 
+            // toolTipDelLog
+            // 
+            toolTipDelLog.AutoPopDelay = 5000;
+            toolTipDelLog.InitialDelay = 500;
+            toolTipDelLog.ReshowDelay = 50;
             // 
             // Main
             // 
@@ -193,6 +250,9 @@
             tabControl.ResumeLayout(false);
             tabPage.ResumeLayout(false);
             contextMenuStripRegList.ResumeLayout(false);
+            tabPageSettings.ResumeLayout(false);
+            panelSettings.ResumeLayout(false);
+            groupBoxLog.ResumeLayout(false);
             tabPageAbout.ResumeLayout(false);
             tabPageAbout.PerformLayout();
             ResumeLayout(false);
@@ -216,6 +276,11 @@
         private System.Windows.Forms.Label labelAbout;
         private System.Windows.Forms.ColumnHeader AppName;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemFlush;
+        private System.Windows.Forms.TabPage tabPageSettings;
+        private System.Windows.Forms.Panel panelSettings;
+        private System.Windows.Forms.GroupBox groupBoxLog;
+        private System.Windows.Forms.Button buttonOpenLog;
+        private System.Windows.Forms.ToolTip toolTipDelLog;
     }
 }
 
