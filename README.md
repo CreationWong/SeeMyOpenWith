@@ -16,6 +16,9 @@
 
 基于 .NET 开发.
 
+## 公告
+[#1](https://github.com/CreationWong/SeeMyOpenWith/discussions/1#discussion-8415471)
+
 ## 路线图
 
 - [ ] 基础功能实现
