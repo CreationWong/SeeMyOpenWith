@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 using Serilog;
 
@@ -20,7 +21,7 @@ namespace SeeMyOpenWith
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
-                .WriteTo.File("logs/runLog.log", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("logs/runLog.log", rollingInterval: RollingInterval.Hour,retainedFileCountLimit:5)
                 .CreateLogger();
             
             Log.Information("Application started");
@@ -31,6 +32,7 @@ namespace SeeMyOpenWith
 
             if (principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
             {
+                // 窗口
                 Log.Information("检测到管理员权限");
                 Log.Information("正在打开窗口");
                 Application.Run(new Main());
