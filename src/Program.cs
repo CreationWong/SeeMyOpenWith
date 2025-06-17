@@ -19,8 +19,10 @@ namespace SeeMyOpenWith
             
             // 日志配置
             Log.Logger = new LoggerConfiguration()
+#if DEBUG
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
+#endif
                 .WriteTo.File("logs/runLog.log", rollingInterval: RollingInterval.Hour,retainedFileCountLimit:5)
                 .CreateLogger();
             
@@ -32,12 +34,15 @@ namespace SeeMyOpenWith
 
             if (principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
             {
-                // 窗口
                 Log.Information("检测到管理员权限");
                 Log.Information("正在打开窗口");
+                
+                // 启动窗口
                 Application.Run(new Main());
+                
                 Log.Information("窗口关闭");
                 Log.Information("Application ended");
+                
                 Log.CloseAndFlush();
                 return;
             }
