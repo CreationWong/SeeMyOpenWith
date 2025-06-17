@@ -52,18 +52,14 @@ jobs:
         uses: NuGet/setup-nuget@v1.1.1
 
       - name: 还原 NuGet 包
-        run: nuget restore ${{ env.SOLUTION_NAME }}
+        run: nuget restore ${{ env.SOLUTION_NAME }} -Verbosity detailed
 
-      - name: 确定构建配置
-        id: set-config
+      - name: 验证 NuGet 包还原
         run: |
-          if ("${{ github.event_name }}" -eq "workflow_dispatch") {
-            $config = "${{ github.event.inputs.configuration }}"
-          } else {
-            $config = "Debug"
-          }
-          echo "CONFIG=$config" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        shell: pwsh
+          if not exist "obj\project.assets.json" (
+            echo "Package restore failed. Please check your dependencies."
+            exit 1
+          )
 
       - name: 构建解决方案
         run: msbuild ${{ env.SOLUTION_NAME }} /p:Configuration=${{ env.CONFIG }} /p:Platform="Any CPU"
