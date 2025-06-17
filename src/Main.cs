@@ -12,7 +12,7 @@ namespace SeeMyOpenWith;
 public partial class Main : Form
 {
     // 类声明
-    RegIO regIO = new RegIO();
+    RegIO _regIo = new RegIO();
 
     public Main()
     {
@@ -67,7 +67,7 @@ public partial class Main : Form
         {
             if (MessageBoxDel(appName))
             {
-                regIO.DeleteRegistryApp(appName);
+                _regIo.DeleteRegistryApp(appName);
 
                 Log.Information("开始刷新列表");
                 FefreshListView();
@@ -113,7 +113,7 @@ public partial class Main : Form
 
         if (MessageBoxDel(appName))
         {
-            regIO.DeleteRegistryApp(appName);
+            _regIo.DeleteRegistryApp(appName);
 
             Log.Information("开始刷新列表");
             FefreshListView();
