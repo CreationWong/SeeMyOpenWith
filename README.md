@@ -1,4 +1,6 @@
 # See My Open With - 查看我的打开方式
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCreationWong%2FSeeMyOpenWith.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FCreationWong%2FSeeMyOpenWith?ref=badge_shield)
+
 
 > [!CAUTION]
 > 本程序涉及**对系统注册表修改**操作,任何误操作均可能导致**不可挽回**后果! 
@@ -719,6 +721,9 @@ Public License instead of this License.  But first, please read
 ```
 
 </details>
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCreationWong%2FSeeMyOpenWith.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FCreationWong%2FSeeMyOpenWith?ref=badge_large)
 
 ## 开源软件使用许可
 
