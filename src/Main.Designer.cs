@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             panel = new System.Windows.Forms.Panel();
             tabControl = new System.Windows.Forms.TabControl();
             tabPage = new System.Windows.Forms.TabPage();
@@ -47,6 +48,8 @@
             groupBoxLog = new System.Windows.Forms.GroupBox();
             buttonOpenLog = new System.Windows.Forms.Button();
             tabPageAbout = new System.Windows.Forms.TabPage();
+            pictureBox1 = new System.Windows.Forms.PictureBox();
+            Copy = new System.Windows.Forms.Label();
             labelAbout = new System.Windows.Forms.Label();
             toolTipDelLog = new System.Windows.Forms.ToolTip(components);
             panel.SuspendLayout();
@@ -57,6 +60,7 @@
             panelSettings.SuspendLayout();
             groupBoxLog.SuspendLayout();
             tabPageAbout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel
@@ -209,6 +213,8 @@
             // 
             // tabPageAbout
             // 
+            tabPageAbout.Controls.Add(pictureBox1);
+            tabPageAbout.Controls.Add(Copy);
             tabPageAbout.Controls.Add(labelAbout);
             tabPageAbout.Location = new System.Drawing.Point(4, 29);
             tabPageAbout.Name = "tabPageAbout";
@@ -218,12 +224,33 @@
             tabPageAbout.Text = "关于";
             tabPageAbout.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.SeeMyOpenWith;
+            pictureBox1.Location = new System.Drawing.Point(6, 6);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(372, 153);
+            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
+            // 
+            // Copy
+            // 
+            Copy.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            Copy.AutoSize = true;
+            Copy.Location = new System.Drawing.Point(978, 767);
+            Copy.Name = "Copy";
+            Copy.Size = new System.Drawing.Size(433, 40);
+            Copy.TabIndex = 1;
+            Copy.Text = "© 2025 CreationWong\r\n采用 GNU GENERAL PUBLIC LICENSE Version 3 协议分发程序";
+            Copy.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
             // labelAbout
             // 
             labelAbout.AutoSize = true;
             labelAbout.Cursor = System.Windows.Forms.Cursors.Help;
             labelAbout.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
-            labelAbout.Location = new System.Drawing.Point(6, 3);
+            labelAbout.Location = new System.Drawing.Point(6, 162);
             labelAbout.Name = "labelAbout";
             labelAbout.Size = new System.Drawing.Size(372, 27);
             labelAbout.TabIndex = 0;
@@ -241,6 +268,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1482, 853);
             Controls.Add(panel);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MinimumSize = new System.Drawing.Size(1500, 900);
             Name = "Main";
@@ -255,6 +283,7 @@
             groupBoxLog.ResumeLayout(false);
             tabPageAbout.ResumeLayout(false);
             tabPageAbout.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
 
         }
@@ -281,6 +310,8 @@
         private System.Windows.Forms.GroupBox groupBoxLog;
         private System.Windows.Forms.Button buttonOpenLog;
         private System.Windows.Forms.ToolTip toolTipDelLog;
+        private System.Windows.Forms.Label Copy;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
