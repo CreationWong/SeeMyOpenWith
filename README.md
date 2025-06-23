@@ -1,3 +1,5 @@
+![](./img/SeeMyOpenWith.png)
+
 # See My Open With - 查看我的打开方式
 
 > [!CAUTION]
@@ -727,6 +729,14 @@ Public License instead of this License.  But first, please read
 用于程序运行日志记录.
 
 采用 [Apache-2.0 license](https://github.com/serilog/serilog?tab=readme-ov-file#Apache-2.0-1-ov-file) 许可协议
+
+
+
+## 安全扫描
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCreationWong%2FSeeMyOpenWith.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FCreationWong%2FSeeMyOpenWith?ref=badge_large&issueType=license)
+
+
 
 ## 特别感谢
 
