@@ -33,18 +33,21 @@
     <Title>SeeMyOpenWith</Title>
     <Company />
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-    <FileVersion>1.1.0</FileVersion>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.1</FileVersion>
+    <AssemblyVersion>1.1.1</AssemblyVersion>
     <NeutralLanguage>zh</NeutralLanguage>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Copyright>Copyright  © 2025 CreationWong</Copyright>
+    <ApplicationIcon>img\SeeMyOpenWith.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>none</DebugType>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -96,6 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="src\Class\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="img\SeeMyOpenWith.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
