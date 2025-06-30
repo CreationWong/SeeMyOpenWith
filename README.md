@@ -2,6 +2,11 @@
 
 # See My Open With - 查看我的打开方式
 
+一个查看、~~修改~~ 、删除 打开方式 菜单项的小工具. 
+
+基于 .NET 开发.
+
+## 公告
 > [!CAUTION]
 > 本程序涉及**对系统注册表修改**操作,任何误操作均可能导致**不可挽回**后果! 
 >
@@ -14,12 +19,57 @@
 >
 > 为了系统安全,请使用最新版本!
 
-一个查看、~~修改~~ 、删除 打开方式 菜单项的小工具. 
-
-基于 .NET 开发.
-
-## 公告
 [#1](https://github.com/CreationWong/SeeMyOpenWith/discussions/1#discussion-8415471)
+
+## 基础交互逻辑
+此处为程序交互与运行逻辑.
+
+```mermaid
+  sequenceDiagram
+    participant U as 用户
+    create participant EXE as 程序
+    U->>EXE: 启动程序
+    create participant REG as 注册表
+    EXE->>REG: 打开注册表
+    loop 遍历注册表
+        EXE->>REG: 读取注册表项
+        REG->>EXE: 返回注册表项
+        EXE->>U: 显示读取到的注册表值
+    end
+    par 联网搜索
+        U->>EXE: 联网搜索命令
+        create participant NET as 浏览器
+        EXE->>NET: 打开浏览器
+        U-->>EXE: 指定项
+        EXE->>NET: 调用搜索引擎 API
+        NET-->NET: 搜索引擎搜索
+        NET<<-->>U: 用户与浏览器交互
+        destroy NET
+        U-xNET: 用户关闭浏览器
+    and 删除
+        U->>EXE: 删除命令
+        U-->>EXE: 指定项
+        loop 遍历注册表
+          EXE->>REG: 删除目标注册表键
+        end
+        loop 遍历注册表
+          EXE->>REG: 读取注册表项
+          REG->>EXE: 返回注册表项
+          EXE->>U: 显示读取到的注册表值
+        end
+    and 刷新
+        U->>EXE: 刷新命令
+        loop 遍历注册表
+          EXE->>REG: 读取注册表项
+          REG->>EXE: 返回注册表项
+          EXE->>U: 显示读取到的注册表值
+        end
+    end
+    destroy REG
+    EXE-xREG: 关闭注册表
+    destroy EXE
+    U-xEXE: 用户关闭程序
+```
 
 ## 路线图
 
