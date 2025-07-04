@@ -20,6 +20,12 @@ public partial class Main : Form
         InitializeComponent();
     }
 
+    /// <summary>
+    ///  窗体
+    ///  加载事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Form_Load(object sender, EventArgs e)
     {
         var identity = WindowsIdentity.GetCurrent();
@@ -38,15 +44,14 @@ public partial class Main : Form
         Log.Information("开始填充列表");
         FefreshListView();
     }
-
-    private void ToolStripMenuItemFlush_Click(object sender, EventArgs e)
-    {
-#if DEBUG
-        Log.Debug("ToolStripMenuItemFlush_Click 触发");
-#endif
-        Log.Information("用户单击刷新");
-        FefreshListView();
-    }
+    
+    /// <summary>
+    ///  键盘按键
+    ///  listViewReg
+    ///  按键按下事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void listViewReg_KeyDown(object sender, KeyEventArgs e)
     {
         var listViewDispose = new ListViewDispose(listViewReg);
@@ -74,7 +79,30 @@ public partial class Main : Form
             }
         }
     }
+    
+    /// <summary>
+    ///  右键菜单项
+    ///  刷新
+    ///  单击事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void ToolStripMenuItemFlush_Click(object sender, EventArgs e)
+    {
+#if DEBUG
+        Log.Debug("ToolStripMenuItemFlush_Click 触发");
+#endif
+        Log.Information("用户单击刷新");
+        FefreshListView();
+    }
 
+    /// <summary>
+    ///  右键菜单项
+    ///  搜索
+    ///  单击事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void ToolStripMenuItemSearch_Click(object sender, EventArgs e)
     {
 #if DEBUG
@@ -91,6 +119,13 @@ public partial class Main : Form
         WebSearch(appName);
     }
 
+    /// <summary>
+    ///  右键菜单项
+    ///  修改
+    ///  单击事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void ToolStripMenuItemRevise_Click(object sender, EventArgs e)
     {
 #if DEBUG
@@ -101,6 +136,13 @@ public partial class Main : Form
         MessageBox.Show("功能开发中...", ":(", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
 
+    /// <summary>
+    ///  右键菜单项
+    ///  删除
+    ///  单击事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void ToolStripMenuItemDel_Click(object sender, EventArgs e)
     {
 #if DEBUG
@@ -120,6 +162,13 @@ public partial class Main : Form
         }
     }
     
+    /// <summary>
+    ///  按钮
+    ///  打开日志文件夹
+    ///  单击事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void buttonOpenLog_Click(object sender, EventArgs e)
     {
 #if DEBUG
@@ -133,6 +182,9 @@ public partial class Main : Form
         Process.Start(processStartInfo);
     }
 
+    /// <summary>
+    ///  刷新 ListView 列表
+    /// </summary>
     private void FefreshListView()
     {
         var listViewDispose = new ListViewDispose(listViewReg);
